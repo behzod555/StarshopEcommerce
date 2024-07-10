@@ -1,0 +1,549 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Meta Tag -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name='copyright' content=''>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Title Tag  -->
+    <title>Starshop technics</title>
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" href="images/favicon.png">
+	<!-- Web Font -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+	
+	<!-- StyleSheet -->
+	
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+	<!-- Magnific Popup -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/magnific-popup.min.css' %}">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
+	<!-- Fancybox -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery.fancybox.min.css' %}">	
+	<!-- Themify Icons -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/themify-icons.css' %}">
+	<!-- Nice Select CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/niceselect.css' %}">
+	<!-- Animate CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+	<!-- Flex Slider CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/flex-slider.min.css' %}">
+	<!-- Owl Carousel -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl-carousel.css' %}">
+	<!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slicknav.min.css' %}">
+	
+	<!-- Eshop StyleSheet -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+	
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+
+	<script type="text/javascript">
+		var user = '{{request.user}}'
+
+		function getToken(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getToken('csrftoken')
+
+		function getCookie(name) {
+		    // Split cookie string and get all individual name=value pairs in an array
+		    var cookieArr = document.cookie.split(";");
+
+		    // Loop through the array elements
+		    for(var i = 0; i < cookieArr.length; i++) {
+		        var cookiePair = cookieArr[i].split("=");
+
+		        /* Removing whitespace at the beginning of the cookie name
+		        and compare it with the given string */
+		        if(name == cookiePair[0].trim()) {
+		            // Decode the cookie value and return
+		            return decodeURIComponent(cookiePair[1]);
+		        }
+		    }
+
+		    // Return null if not found
+		    return null;
+		}
+		var cart = JSON.parse(getCookie('cart'))
+
+		if (cart == undefined){
+			cart = {}
+			console.log('Cart Created!', cart)
+			document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+		}
+		console.log('Cart:', cart)
+	
+	</script>
+
+	
+	
+</head>
+<body class="js">
+	
+	<!-- Preloader -->
+	<div class="preloader">
+		<div class="preloader-inner">
+			<div class="preloader-icon">
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+	</div>
+	<!-- End Preloader -->
+	
+	
+	<!-- Header -->
+	<header class="header shop">
+		<!-- Topbar -->
+		<div class="topbar">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-5 col-md-12 col-12">
+						<!-- Top Left -->
+						<div class="top-left">
+							<ul class="list-main">
+								<li><i class="ti-headphone-alt"></i> +060 (800) 801-582</li>
+								<li><i class="ti-email"></i> support@shophub.com</li>
+							</ul>
+						</div>
+						<!--/ End Top Left -->
+					</div>
+					<div class="col-lg-7 col-md-12 col-12">
+						<!-- Top Right -->
+						<div class="right-content">
+							<ul class="list-main">
+								<li><i class="ti-location-pin"></i> Местоположение</li>
+								<li><i class="ti-user"></i> <a href="#">Личный кабинет</a></li>
+								<li><i class="ti-power-off"></i><a href="login.html#">Логин</a></li>
+							</ul>
+						</div>
+						<!-- End Top Right -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Topbar -->
+		<div class="middle-inner">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-2 col-md-2 col-12">
+						<!-- Logo -->
+						<div class="logo">
+							<a href="{% url 'store' %}"><img src="{% static 'images/logo.png' %}" alt="logo"  style="height:60px;width:300px"></a>
+						</div>
+						<!--/ End Logo -->
+						<!-- Search Form -->
+						<div class="search-top">
+							<div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>
+							<div class="sinlge-bar shopping">
+								
+								<a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count">{{cartItems}}</span></a>
+							
+						</div>
+							<!-- Search Form -->
+							<div class="search-top">
+								<form class="search-form">
+									<input type="text" placeholder="Search here..." name="search">
+									<button value="search" type="submit"><i class="ti-search"></i></button>
+								</form>
+							</div>
+							<!--/ End Search Form -->
+						</div>
+						<!--/ End Search Form -->
+						<div class="mobile-nav">
+
+						</div>
+					</div>
+					<div class="col-lg-8 col-md-7 col-12">
+						<div class="search-bar-top">
+							<div class="search-bar">
+								<select>
+									<option selected="selected">Все категории</option>
+									<option>Бытовые техники</option>
+									<option>Телефоны</option>
+									<option>Телевизоры</option>
+								</select>
+								<form>
+									<input name="search" placeholder="Поиск....." type="search">
+									<button class="btnn"><i class="ti-search"></i></button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-3 col-12">
+						<div class="right-bar">
+							<!-- Search Form -->
+							<div class="sinlge-bar">
+								<a href="#" class="single-icon"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+							</div>
+							<div class="sinlge-bar">
+								<a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+							</div>
+							<div class="sinlge-bar shopping">
+								<a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count">{{cartItems}}</span></a>
+								<!-- Shopping Item -->
+								<div class="shopping-item">
+									<div class="dropdown-cart-header">
+										<span>{{order.get_cart_items}}</span>
+										<a href="{% url 'cart' %}">В корзину</a>
+									</div>
+									<ul class="shopping-list">
+									{% for item in items %}	
+										<li>
+											<div class="action chg-quantity update-cart"  data-title="Remove" data-product="{{item.product.id}}" data-action="delete"><a style="cursor:pointer" href="#" class="remove" title="Удалить"><i class="fa fa-remove"></i></a></div>
+											<a class="cart-img" href="#"><img src="{{item.product.imageURL}}" alt="#"></a>
+											<h4><a href="#">{{item.product.name}}</a></h4>
+											<p class="quantity">{{item.quantity}}x - <span class="amount">${{item.product.price}}</span></p>
+										</li>
+									{% endfor %}
+									</ul>
+									<div class="bottom">
+										<div class="total">
+											<span>Total</span>
+											<span class="total-amount">${{order.get_cart_total|floatformat:2}}</span>
+										</div>
+										<a href="{ url 'checkout' }" class="btn animate">Оформить заказ</a>
+									</div>
+								</div>
+								<!--/ End Shopping Item -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Header Inner -->
+		<div class="header-inner">
+			<div class="container">
+				<div class="cat-nav-head">
+					<div class="row">
+						<div class="col-lg-3">
+							<div class="all-category">
+								<h3 class="cat-heading"><i class="fa fa-bars" aria-hidden="true"></i>Каталог</h3>
+								<ul class="main-category">
+									<li><a href="{% url 'Bytovye' %}">Бытовая техника <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+										<ul class="sub-category">
+											<li><a href="{% url 'BytovyePylesosy' %}">Пылесосы</a></li>
+											<li><a href="{% url 'BytovyeStiralki' %}">Стиральные машины</a></li>
+											<li><a href="{% url 'BytovyeXolodilniki' %}">Холодильники</a></li>
+										</ul>
+									</li>
+									<li><a href="{% url 'Klimaticheskaya' %}">Климатическая техника <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+										<ul class="sub-category">
+											<li><a href="{% url 'KlimaticheskayaVentilyatory' %}">Вентиляторы</a></li>
+											<li><a href="{% url 'KlimaticheskayaKonditsionery' %}">Кондиционеры</a></li>
+											<li><a href="{% url 'KlimaticheskayaObogrevateli' %}">Обогреватели</a></li>
+										</ul>
+									</li>
+									<li><a href="{% url 'Komputernaya' %}">Компьютерная техника <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+										<ul class="sub-category">
+											<li><a href="{% url 'KomputernayaNoutbuki' %}">Ноутбуки</a></li>
+											<li><a href="{% url 'KomputernayaMonitory' %}">Мониторы</a></li>
+											<li><a href="{% url 'KomputernayaMonobolki' %}">Моноболки</a></li>
+										</ul>
+									</li>
+									<li><a href="{% url 'Mujskie' %}">Мужские туфли <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+										<ul class="sub-category">
+											
+										</ul>
+									</li>
+									<li><a href="{% url 'Sportivnye' %}">Спортивные товары <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+										<ul class="sub-category">
+											
+										</ul>
+									</li>
+									<li><a href="{% url 'televizory' %}">Телевизоры <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+										<ul class="sub-category">
+											<li><a href="{% url 'televizorySamsung' %}">Телевизоры Samsung</a></li>
+											<li><a href="{% url 'televizoryLg' %}">Телевизоры LG</a></li>
+											<li><a href="{% url 'televizorySony' %}">Телевизоры Sony</a></li>
+										</ul>
+									</li>
+									<li><a href="{% url 'telefon' %}">Телефоны <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+										<ul class="sub-category">
+											<li><a href="{% url 'TelefonyXiaomi' %}">Xiaomi</a></li>
+											<li><a href="{% url 'TelefonySamsung' %}">Samsung</a></li>
+											<li><a href="{% url 'TelefonyApple' %}">Apple</a></li>
+										</ul>
+									</li>
+									<!--<li class="main-mega"><a href="#">best selling <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+										<ul class="mega-menu">
+											<li class="single-menu">
+												<a href="#" class="title-link">Shop Kid's</a>
+												<div class="image">
+													<img src="https://via.placeholder.com/225x155" alt="#">
+												</div>
+												<div class="inner-link">
+													<a href="#">Kids Toys</a>
+													<a href="#">Kids Travel Car</a>
+													<a href="#">Kids Color Shape</a>
+													<a href="#">Kids Tent</a>
+												</div>
+											</li>
+											<li class="single-menu">
+												<a href="#" class="title-link">Shop Men's</a>
+												<div class="image">
+													<img src="https://via.placeholder.com/225x155" alt="#">
+												</div>
+												<div class="inner-link">
+													<a href="#">Watch</a>
+													<a href="#">T-shirt</a>
+													<a href="#">Hoodies</a>
+													<a href="#">Formal Pant</a>
+												</div>
+											</li>
+											<li class="single-menu">
+												<a href="#" class="title-link">Shop Women's</a>
+												<div class="image">
+													<img src="https://via.placeholder.com/225x155" alt="#">
+												</div>
+												<div class="inner-link">
+													<a href="#">Ladies Shirt</a>
+													<a href="#">Ladies Frog</a>
+													<a href="#">Ladies Sun Glass</a>
+													<a href="#">Ladies Watch</a>
+												</div>
+											</li>
+										</ul>
+									</li>
+									<li><a href="#">accessories</a></li>
+									<li><a href="#">top 100 offer</a></li>
+									<li><a href="#">sunglass</a></li>
+									<li><a href="#">watch</a></li>
+									<li><a href="#">man’s product</a></li>
+									<li><a href="#">ladies</a></li>
+									<li><a href="#">westrn dress</a></li>
+									<li><a href="#">denim </a></li>-->
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-9 col-12">
+							<div class="menu-area">
+								<!-- Main Menu -->
+								<nav class="navbar navbar-expand-lg">
+									<div class="navbar-collapse">	
+										<div class="nav-inner">	
+											<ul class="nav main-menu menu navbar-nav">
+													<li class="active" id="main"><a style="color:#4d2d60" href="{% url 'store' %}">Главная</a></li>
+													<li id="catalog"><a href="{% url 'catalog' %}">Каталог<i class="catalog-angle ti-angle-down"></i></a>
+														<ul class="dropdown">
+															<li><a href="{% url 'Bytovye' %}">Бытовые техники<i class="ti-angle-down"></i></a>
+															<ul class="dropdown" class="hidden-div">
+															<li><a href="{% url 'BytovyePylesosy' %}">Пылесосы</a></li>
+														<li><a href="{% url 'BytovyeStiralki' %}">Стиральные машины</a></li>
+													<li><a href="{% url 'BytovyeXolodilniki' %}">Холодильники</a></li></ul></li>
+															<li><a href="{% url 'telefon' %}">Телефоны<i class="ti-angle-down"></i></a>
+															<ul class="dropdown" class="hidden-div">
+															<li><a href="{% url 'TelefonyXiaomi' %}">Xiaomi</a></li>
+														<li><a href="{% url 'TelefonyApple' %}">Apple</a></li>
+													<li><a href="{% url 'TelefonySamsung' %}">Samsung</a></li></ul></li>
+															<li><a href="{% url 'televizory' %}">Телевизоры<i class="ti-angle-down"></i></a>
+															<ul class="dropdown" class="hidden-div">
+															<li><a href="{% url 'televizorySamsung' %}">Samsung</a></li>
+														<li><a href="{% url 'televizoryLg' %}">LG</a></li>
+													<li><a href="{% url 'televizorySony' %}">Sony</a></li></ul></li>
+															<li><a href="{% url 'Komputernaya' %}">Компьютерные техники<i class="ti-angle-down"></i></a>
+															<ul class="dropdown" class="hidden-div">
+															<li><a href="{% url 'KomputernayaNoutbuki' %}">Ноутбуки</a></li>
+														<li><a href="{% url 'KomputernayaMonitory' %}">Мониторы</a></li>
+													<li><a href="{% url 'KomputernayaMonobolki' %}">Моноболки</a></li></ul></li>
+															<li><a href="{% url 'Klimaticheskaya' %}">Климатические техники<i class="ti-angle-down"></i></a>
+															<ul class="dropdown" class="hidden-div">
+															<li><a href="{% url 'KlimaticheskayaVentilyatory' %}">Вентиляторы</a></li>
+														<li><a href="{% url 'KlimaticheskayaKonditsionery' %}">Кондиционеры</a></li>
+													<li><a href="{% url 'KlimaticheskayaObogrevateli' %}">Обогреватели</a></li></ul></li>
+															<li><a href="{% url 'Mujskie' %}">Мужские туфли</a></li>
+															<li><a href="{% url 'Sportivnye' %}">Спортивные товары</a></li>
+														</ul>
+													</li>											
+													<li><a href="#">Услуги</a></li>
+													<li><a href="#">Магазин<i class="ti-angle-down"></i><span class="new">Новые</span></a>
+														<ul class="dropdown">
+															<li><a href="cart.html">Корзина</a></li>
+															<li><a href="checkout.html">Оформить заказ</a></li>
+														</ul>
+													</li>								
+													<li><a href="#">Блог<i class="ti-angle-down"></i></a>
+														<ul class="dropdown">
+															
+														</ul>
+													</li>
+													<li><a href="contact.html">Контакты</a></li>
+												</ul>
+										</div>
+									</div>
+								</nav>
+								<!--/ End Main Menu -->	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ End Header Inner -->
+	</header>
+<body>        {% block content %}
+
+
+            {% endblock content %}
+         </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<!-- Footer -->
+	<footer class="footer">
+		<!-- Footer Top -->
+		<div class="footer-top section">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-5 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer about">
+							<div class="logo">
+								<a href="{% url 'store' %}"><img src="{% static 'images/logo.png' %}" alt="#" ></a>
+							</div>
+							<p class="text">Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue,  magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</p>
+							<p class="call">Есть вопросы? Позвоните 24/7<span><a href="tel:123456789">+0123 456 789</a></span></p>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+					<div class="col-lg-2 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer links">
+							<h4>Информация</h4>
+							<ul>
+								<li><a href="{% url 'about' %}">О компании</a></li>
+								<li><a href="{% url 'about' %}">Вопрос-ответ</a></li>
+								<li><a href="{% url 'about' %}">Политика</a></li>
+								<li><a href="#">Контакты</a></li>
+								<li><a href="{% url 'about' %}">Помощь</a></li>
+							</ul>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+					<div class="col-lg-2 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer links">
+							<h4>Обслуживание клиентов</h4>
+							<ul>
+								<li><a href="#">Способы оплаты</a></li>
+								<li><a href="#">Отзывы</a></li>
+								
+								<li><a href="{% url 'about' %}">Доставка</a></li>
+								<li><a href="{% url 'about' %}">Политика</a></li>
+							</ul>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer social">
+							<h4>Контакты</h4>
+							<!-- Single Widget -->
+							<div class="contact">
+								<ul>
+									<li>NO. 342 - London Oxford Street.</li>
+									<li>012 United Kingdom.</li>
+									<li>info@eshop.com</li>
+									<li>+032 3456 7890</li>
+								</ul>
+							</div>
+							<!-- End Single Widget -->
+							<ul>
+								<li><a href="#"><i class="ti-facebook"></i></a></li>
+								<li><a href="#"><i class="ti-twitter"></i></a></li>
+								<li><a href="#"><i class="ti-flickr"></i></a></li>
+								<li><a href="#"><i class="ti-instagram"></i></a></li>
+							</ul>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Footer Top -->
+		<div class="copyright">
+			<div class="container">
+				<div class="inner">
+					<div class="row">
+						<div class="col-lg-6 col-12">
+							<div class="left">
+								
+							</div>
+						</div>
+						<div class="col-lg-6 col-12">
+							<div class="right">
+								<img src="images/payments.png" alt="#">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+<!-- Footer -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+	<!-- Jquery -->
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+  
+    <script type="text/javascript" src="{% static 'js/jquery-migrate-3.0.0.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
+
+	<!-- Popper JS -->
+	<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+	<!-- Bootstrap JS -->
+	<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+	<!-- Color JS -->
+	<script type="text/javascript" src="{% static 'js/colors.js' %}"></script>
+	<!-- Slicknav JS -->
+	<script type="text/javascript" src="{% static 'js/slicknav.min.js' %}"></script>
+	<!-- Owl Carousel JS -->
+	<script type="text/javascript" src="{% static 'js/owl-carousel.js' %}"></script>
+	<!-- Magnific Popup JS -->
+	<script type="text/javascript" src="{% static 'js/magnific-popup.js' %}"></script>
+	<!-- Waypoints JS -->
+	<script type="text/javascript" src="{% static 'js/waypoints.min.js' %}"></script>
+	<!-- Countdown JS -->
+	<script type="text/javascript" src="{% static 'js/finalcountdown.min.js' %}"></script>
+	<!-- Nice Select JS -->
+	<script type="text/javascript" src="{% static 'js/nicesellect.js' %}"></script>
+	<!-- Flex Slider JS -->
+	<script type="text/javascript" src="{% static 'js/flex-slider.js' %}"></script>
+	<!-- ScrollUp JS -->
+	<script type="text/javascript" src="{% static 'js/scrollup.js' %}"></script>
+	<!-- Onepage Nav JS -->
+	<script type="text/javascript" src="{% static 'js/onepage-nav.min.js' %}"></script>
+	<!-- Easing JS -->
+	<script type="text/javascript" src="{% static 'js/easing.js' %}"></script>
+	<!-- Active JS -->
+	<script type="text/javascript" src="{% static 'js/active.js' %}"></script>
+</body>
+</html>
